@@ -1,10 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/untitled1.dir/eurovision.cpp.obj"
-  "CMakeFiles/untitled1.dir/main.cpp.obj"
-  "CMakeFiles/untitled1.dir/test1.cpp.obj"
-  "libuntitled1.dll.a"
-  "untitled1.exe"
-  "untitled1.exe.manifest"
+  "CMakeFiles/untitled1.dir/eurovision.cpp.o"
+  "CMakeFiles/untitled1.dir/main.cpp.o"
+  "CMakeFiles/untitled1.dir/test1.cpp.o"
+  "untitled1"
   "untitled1.pdb"
 )
 

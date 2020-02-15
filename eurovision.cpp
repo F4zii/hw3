@@ -90,7 +90,7 @@ String operator+(const String& str1, const String& str2) { return String(str1) +
 
 /**@class Participant*/
 
-Participant::Participant(String name, String song, int songLength, string singer)
+Participant::Participant(String name, String song, int songLength, String singer)
 {
     this->name = name;
     p_song = song;
@@ -99,17 +99,17 @@ Participant::Participant(String name, String song, int songLength, string singer
     registered = false;
 }
 
-string Participant::state()
+String Participant::state()
 {
     return name;
 }
 
-string Participant::song()
+String Participant::song()
 {
     return p_song;
 }
 
-string Participant::singer()
+String Participant::singer()
 {
     return p_singer;
 }
@@ -129,7 +129,7 @@ int Participant::timeLength()
     return p_length;
 }
 
-void Participant::update(string song, int length, string singer)
+void Participant::update(String song, int length, String singer)
 {
     if(registered)
         return;
@@ -140,7 +140,7 @@ void Participant::update(string song, int length, string singer)
 
 /** @class Voter*/
 
-Voter::Voter(string state, VoterType type)
+Voter::Voter(String state, VoterType type)
 {
     v_state=state;
     v_type=type;
@@ -152,7 +152,7 @@ VoterType Voter::voterType()
     return v_type;
 }
 
-string Voter::state()
+String Voter::state()
 {
     return v_state;
 }
@@ -165,7 +165,7 @@ Voter& Voter::operator++()
 
 /** @struct Vote*/
 
-Vote::Vote(Voter source, string target)
+Vote::Vote(Voter source, String target)
 {
     this->source = source.state();
     this->type = source.voterType();
@@ -189,3 +189,7 @@ MainControl::MainControl(int max_length, int max_participants, int max_regular_v
     this->max_regular_votes = max_regular_votes;
 }
 
+void MainControl::setPhase(Phase phase1) {
+    phase = phase1;
+
+}

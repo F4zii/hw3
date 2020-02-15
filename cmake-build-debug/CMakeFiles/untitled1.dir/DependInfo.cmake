@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Ethan/CLionProjects/eurovision_hw3/eurovision.cpp" "C:/Users/Ethan/CLionProjects/eurovision_hw3/cmake-build-debug/CMakeFiles/untitled1.dir/eurovision.cpp.obj"
-  "C:/Users/Ethan/CLionProjects/eurovision_hw3/main.cpp" "C:/Users/Ethan/CLionProjects/eurovision_hw3/cmake-build-debug/CMakeFiles/untitled1.dir/main.cpp.obj"
-  "C:/Users/Ethan/CLionProjects/eurovision_hw3/test1.cpp" "C:/Users/Ethan/CLionProjects/eurovision_hw3/cmake-build-debug/CMakeFiles/untitled1.dir/test1.cpp.obj"
+  "/home/iddos/Documents/Github/CPP/hw3/eurovision.cpp" "/home/iddos/Documents/Github/CPP/hw3/cmake-build-debug/CMakeFiles/untitled1.dir/eurovision.cpp.o"
+  "/home/iddos/Documents/Github/CPP/hw3/main.cpp" "/home/iddos/Documents/Github/CPP/hw3/cmake-build-debug/CMakeFiles/untitled1.dir/main.cpp.o"
+  "/home/iddos/Documents/Github/CPP/hw3/test1.cpp" "/home/iddos/Documents/Github/CPP/hw3/cmake-build-debug/CMakeFiles/untitled1.dir/test1.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
