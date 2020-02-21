@@ -72,6 +72,7 @@ public :
 
     void update(String song, int length ,  String singer);
 
+    friend ostream &operator<<(ostream &os, const Participant &p);
 
     ~Participant() = default;
 };
@@ -98,6 +99,8 @@ public :
     int timesOfVotes() { return votes; }
 
     const;
+
+    friend ostream &operator<<(ostream &os, const Voter &v);
 };
 
 
@@ -136,11 +139,13 @@ public :
 
     MainControl &operator+=(Participant &p);
 
-    MainControl &operator+=(Vote &v);
+    MainControl &operator+=(Vote v);
 
     MainControl &operator-=(Participant &p);
 
     bool participate(const String &name) const;
+
+    bool legalParticipant(Participant &p) const;
 
     friend ostream &operator<<(std::ostream &os, const MainControl &eurovision);
 };

@@ -166,6 +166,9 @@ Voter& Voter::operator++()
     return *this;
 }
 
+ostream &operator<<(ostream &os, const Voter &v) {
+    // TODO
+}
 
 /** @struct Vote*/
 
@@ -192,7 +195,7 @@ MainControl::MainControl(int max_length, int max_participants, int max_regular_v
     this->max_regular_votes = max_regular_votes;
 }
 
-MainControl &MainControl::operator+=(Vote &v) {
+MainControl &MainControl::operator+=(Vote v) {
     // TODO
 }
 
@@ -211,6 +214,10 @@ void MainControl::setPhase(const Phase &p) {
 
 bool MainControl::participate(const String &name) const {
     // TODO return if the participate exists
+}
+
+bool MainControl::legalParticipant(Participant &p) const {
+    // TODO
 }
 
 ostream &operator<<(ostream &os, const MainControl &eurovision) {
