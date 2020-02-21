@@ -129,22 +129,25 @@ int Participant::timeLength()
     return p_length;
 }
 
-void Participant::update(String song, int length, String singer)
-{
-    if(registered)
+void Participant::update(String song, int length, String singer) {
+    if (registered)
         return;
     p_song = song;
     p_singer = singer;
     p_length = length;
 }
 
+ostream &operator<<(ostream &os, const Participant &p) {
+    // TODO print the stats
+    return os;
+}
+
 /** @class Voter*/
 
-Voter::Voter(String state, VoterType type)
-{
-    v_state=state;
-    v_type=type;
-    votes=0;
+Voter::Voter(String state, VoterType type) {
+    v_state = state;
+    v_type = type;
+    votes = 0;
 }
 
 VoterType Voter::voterType()
@@ -162,6 +165,7 @@ Voter& Voter::operator++()
     votes++;
     return *this;
 }
+
 
 /** @struct Vote*/
 
@@ -181,15 +185,35 @@ Vote& Vote::operator++()
 
 /** @class MainControl */
 
-MainControl::MainControl(int max_length, int max_participants, int max_regular_votes)
-{
+MainControl::MainControl(int max_length, int max_participants, int max_regular_votes) {
     this->phase = Registration;
     this->max_length = max_length;
     this->max_participants = max_participants;
     this->max_regular_votes = max_regular_votes;
 }
 
-void MainControl::setPhase(Phase phase1) {
-    phase = phase1;
+MainControl &MainControl::operator+=(Vote &v) {
+    // TODO
+}
 
+MainControl &MainControl::operator+=(Participant &p) {
+    // TODO
+}
+
+MainControl &MainControl::operator-=(Participant &p) {
+    // TODO
+}
+
+
+void MainControl::setPhase(const Phase &p) {
+    phase = p;
+}
+
+bool MainControl::participate(const String &name) const {
+    // TODO return if the participate exists
+}
+
+ostream &operator<<(ostream &os, const MainControl &eurovision) {
+    // TODO print the stats
+    return os;
 }

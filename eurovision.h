@@ -93,8 +93,11 @@ public :
 
     String state();
 
-    Voter& operator++(); //Votes number check is internal int operator+=(Vote)
+    Voter &operator++(); //Votes number check is internal int operator+=(Vote)
 
+    int timesOfVotes() { return votes; }
+
+    const;
 };
 
 
@@ -116,12 +119,11 @@ struct Vote
 // -----------------------------------------------------------
 
 
-class MainControl
-{
+class MainControl {
     Phase phase;
-    Participant*  participants;
-    Voter* voters;
-    Vote* votes;
+    Participant *participants;
+    Voter *voters;
+    Vote *votes;
     int max_length;
     int max_participants;
     int max_regular_votes;
@@ -129,8 +131,18 @@ class MainControl
 
 public :
     MainControl(int max_length = 180, int max_participants = 26, int max_regular_votes = 5);
-    void setPhase(Phase phase1);
 
+    void setPhase(const Phase &p);
+
+    MainControl &operator+=(Participant &p);
+
+    MainControl &operator+=(Vote &v);
+
+    MainControl &operator-=(Participant &p);
+
+    bool participate(const String &name) const;
+
+    friend ostream &operator<<(std::ostream &os, const MainControl &eurovision);
 };
 
 // -----------------------------------------------------------
