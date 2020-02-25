@@ -136,7 +136,13 @@ void Participant::update(const String &song, int length, const String &singer) {
     p_length = length;
 }
 
-
+ostream &operator<<(ostream &os, const Participant &p) {
+    return os << '['
+              << p.name <<
+              '/' << p.p_song <<
+              '/' << p.p_length <<
+              '/' << p.p_singer << ']';
+}
 
 /** @class Voter*/
 
