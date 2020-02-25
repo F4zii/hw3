@@ -72,16 +72,16 @@ public :
 
     void update(const String &song, int length, const String &singer);
 
-    friend ostream &operator<<(ostream &os, const Participant &p);
-
     ~Participant() = default;
 };
+
+ostream &operator<<(ostream &os, const Participant &p);
+
 
 //---------------------------------------------------
 
 
-class Voter
-{
+class Voter {
     String v_state; //Named vstate and vtype to not interfere with state() and voterType() functions
     VoterType v_type;
     int votes;
@@ -97,8 +97,6 @@ public :
     Voter &operator++(); //Votes number check is internal int operator+=(Vote)
 
     int timesOfVotes() { return votes; };
-
-    friend ostream &operator<<(ostream &os, const Voter &v);
 };
 
 
@@ -117,6 +115,7 @@ struct Vote {
 
 };
 
+ostream &operator<<(ostream &os, const Voter &v);
 // -----------------------------------------------------------
 
 
