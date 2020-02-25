@@ -58,11 +58,11 @@ public :
 
     Participant operator=(const Participant& ) = delete;
 
-    String state();
+    String state() const;
 
-    String song();
+    String song() const;
 
-    String singer();
+    String singer() const;
 
     void updateRegistered(bool registered);
 

@@ -99,18 +99,15 @@ Participant::Participant(const String &name, const String &song, int songLength,
     registered = false;
 }
 
-String Participant::state()
-{
+String Participant::state() const {
     return name;
 }
 
-String Participant::song()
-{
+String Participant::song() const {
     return p_song;
 }
 
-String Participant::singer()
-{
+String Participant::singer() const {
     return p_singer;
 }
 
@@ -137,6 +134,7 @@ void Participant::update(const String &song, int length, const String &singer) {
 }
 
 ostream &operator<<(ostream &os, const Participant &p) {
+    String p_song = p.song()
     return os << '['
               << p.name <<
               '/' << p.p_song <<
