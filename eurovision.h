@@ -52,7 +52,7 @@ class Participant
     bool registered;
 
 public :
-    Participant(String name, String song, int songLength, String singer );
+    Participant(const String &name, const String &song, int songLength, const String &singer);
 
     Participant(const Participant& ) = delete;
 
@@ -70,7 +70,7 @@ public :
 
     int timeLength();
 
-    void update(String song, int length ,  String singer);
+    void update(const String &song, int length, const String &singer);
 
     friend ostream &operator<<(ostream &os, const Participant &p);
 
@@ -96,9 +96,7 @@ public :
 
     Voter &operator++(); //Votes number check is internal int operator+=(Vote)
 
-    int timesOfVotes() { return votes; }
-
-    const;
+    int timesOfVotes() { return votes; };
 
     friend ostream &operator<<(ostream &os, const Voter &v);
 };
@@ -106,16 +104,16 @@ public :
 
 // -----------------------------------------------------------
 
-struct Vote
-{
+struct Vote {
     String source;
     VoterType type;
     String target;
     int votes_num;
 
-    Vote(Voter source, String target);
-    Vote& operator++(); //Adds a vote to numOfVotes (reduces number of structs needed to store votes)
-    ~Vote ()= default;
+    Vote(Voter source, const String &target);
+
+    Vote &operator++(); //Adds a vote to numOfVotes (reduces number of structs needed to store votes)
+    ~Vote() = default;
 
 };
 
