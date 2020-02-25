@@ -1,0 +1,52 @@
+
+TEST C.1
+
+TEST C.2
+
+TEST C.3
+Green Room-> line: 2, chair: 10
+Not For Sale !
+
+TEST C.4
+
+TEST C.5
+
+TEST C.6
+Front-> area: C, line: 8, chair: 20
+700
+
+TEST C.7
+Middle-> area: D, line: 30, chair: 15
+430
+
+TEST C.8
+Rear-> area: E, line: 60, chair: 18
+170
+
+TEST C.9
+
+TEST C.10
+Golden Circle-> line: 2, chair: 14
+1500
+
+TEST C.11
+Disable Podium-> line: 1, chair: 10
+200
+
+TEST C.12
+Disable Podium-> line: 1, chair: 11
+200
+
+TEST C.13
+Green Room-> line: 3, chair: 8
+Not For Sale !
+Front-> area: A, line: 5, chair: 8
+750
+Middle-> area: B, line: 25, chair: 35
+470
+Rear-> area: E, line: 70, chair: 4
+190
+Golden Circle-> line: 2, chair: 19
+1600
+Disable Podium-> line: 1, chair: 5
+200

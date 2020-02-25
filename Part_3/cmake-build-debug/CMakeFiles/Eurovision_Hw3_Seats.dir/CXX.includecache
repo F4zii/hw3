@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Ethan/CLionProjects/Eurovision_Hw3_Seats/seat.h
+iostream
+-
+string
+-
+
+C:/Users/Ethan/CLionProjects/Eurovision_Hw3_Seats/test_part_c.cpp
+iostream
+-
+seat.h
+C:/Users/Ethan/CLionProjects/Eurovision_Hw3_Seats/seat.h
+
