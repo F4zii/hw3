@@ -120,8 +120,7 @@ bool Participant::isRegistered()
     return registered;
 }
 
-int Participant::timeLength()
-{
+int Participant::timeLength() const {
     return p_length;
 }
 
@@ -134,12 +133,15 @@ void Participant::update(const String &song, int length, const String &singer) {
 }
 
 ostream &operator<<(ostream &os, const Participant &p) {
-    String p_song = p.song()
+    String song = p.song();
+    String name = p.state();
+    String singer = p.singer();
+    int len = p.timeLength();
     return os << '['
-              << p.name <<
-              '/' << p.p_song <<
-              '/' << p.p_length <<
-              '/' << p.p_singer << ']';
+              << name <<
+              '/' << song <<
+              '/' << len <<
+              '/' << singer << ']';
 }
 
 /** @class Voter*/
