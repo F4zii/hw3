@@ -68,7 +68,7 @@ public :
 
     bool isRegistered();
 
-    int timeLength();
+    int timeLength() const;
 
     void update(const String &song, int length, const String &singer);
 
