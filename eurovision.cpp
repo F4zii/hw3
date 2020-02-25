@@ -90,7 +90,7 @@ String operator+(const String& str1, const String& str2) { return String(str1) +
 
 /**@class Participant*/
 
-Participant::Participant(String name, String song, int songLength, String singer)
+Participant::Participant(const String &name, const String &song, int songLength, const String &singer)
 {
     this->name = name;
     p_song = song;
@@ -114,9 +114,8 @@ String Participant::singer()
     return p_singer;
 }
 
-void Participant::updateRegistered(bool registered)
-{
-    this->registered = registered;
+void Participant::updateRegistered(bool is_registered) {
+    this->registered = is_registered;
 }
 
 bool Participant::isRegistered()
@@ -129,7 +128,7 @@ int Participant::timeLength()
     return p_length;
 }
 
-void Participant::update(String song, int length, String singer) {
+void Participant::update(const String &song, int length, const String &singer) {
     if (registered)
         return;
     p_song = song;
@@ -137,10 +136,7 @@ void Participant::update(String song, int length, String singer) {
     p_length = length;
 }
 
-ostream &operator<<(ostream &os, const Participant &p) {
-    // TODO print the stats
-    return os;
-}
+
 
 /** @class Voter*/
 
@@ -172,7 +168,7 @@ ostream &operator<<(ostream &os, const Voter &v) {
 
 /** @struct Vote*/
 
-Vote::Vote(Voter source, String target)
+Vote::Vote(Voter source, const String &target)
 {
     this->source = source.state();
     this->type = source.voterType();
