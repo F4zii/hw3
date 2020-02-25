@@ -130,7 +130,7 @@ class MainControl {
 
 
 public :
-    MainControl(int max_length = 180, int max_participants = 26, int max_regular_votes = 5);
+    explicit MainControl(int max_length = 180, int max_participants = 26, int max_regular_votes = 5);
 
     void setPhase(const Phase &p);
 
