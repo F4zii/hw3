@@ -35,19 +35,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/iddos/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.6015.37/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /home/iddos/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.6015.37/bin/cmake/linux/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/iddos/Documents/Github/CPP/hw3
+CMAKE_SOURCE_DIR = /Users/iddosoreq/CLionProjects/hw3
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/iddos/Documents/Github/CPP/hw3/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/iddosoreq/CLionProjects/hw3/cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -74,14 +74,14 @@ preinstall:
 CMakeFiles/untitled1.dir/all:
 	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/depend
 	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/iddos/Documents/Github/CPP/hw3/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target untitled1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/iddosoreq/CLionProjects/hw3/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target untitled1"
 .PHONY : CMakeFiles/untitled1.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/untitled1.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/iddos/Documents/Github/CPP/hw3/cmake-build-debug/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/iddosoreq/CLionProjects/hw3/cmake-build-debug/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/untitled1.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/iddos/Documents/Github/CPP/hw3/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/iddosoreq/CLionProjects/hw3/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/untitled1.dir/rule
 
 # Convenience name for target.
