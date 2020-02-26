@@ -5,6 +5,59 @@
 
 
 /**@class String (for use instead of std::string)*/
+
+//void mergeA(int low , int mid , int high, String array)
+//{
+//    int i = low, j = mid+1 , k = low;
+//    String temp[5];
+//
+//    while(i <= mid && j <= high)
+//    {
+//        if( array[i] < array[j] )
+//        {
+//            temp[k]=array[i];
+//            i++;
+//        }
+//        else
+//        {
+//            temp[k].assign(array[j]);
+//            j++;
+//        }
+//        k++;
+//    }
+//    if(i > mid )
+//    {
+//        for(int h = j ;h <= high ; h++ )
+//        {
+//            temp[k].assign(array[h]);
+//            k++;
+//        }
+//    }
+//    else
+//        for(int h = i; h<= mid ; h++ )
+//        {
+//            temp[k].assign(array[h]);
+//            k++;
+//        }
+//    for(int i = 0; i <= high ; i++)
+//    {
+//        array[i].assign(temp[i]);
+//    }
+//}
+//
+//void mergeSortA(int low , int high)
+//{
+//    int mid = 0;
+//    if(low < high)
+//    {
+//        mid = ((low+high)/2);
+//        mergeSortA(low, mid);
+//        mergeSortA(mid + 1, high);
+//        mergeA(low, mid, high);
+//    }
+//}
+
+
 void error(const char* str) {
     cerr << "Error: " << str << endl;
     exit(0);
@@ -241,6 +294,8 @@ MainControl &MainControl::operator+=(Participant &p) {
         return *this;
     if (participate(p.state()))
         return *this;
+    if (!legalParticipant(p))
+        return *this;
     // reference is also updated for future use
     p.updateRegistered(true);
     for (int i=0;i<max_participants;i++) {
@@ -263,7 +318,7 @@ MainControl &MainControl::operator-=(Participant &p) {
         return *this;
     // reference is also updated for future use
     p.updateRegistered(false);
-    for (int i = 0; i < current_participants; i++) {
+    for (int i = 0; i < max_participants; i++) {
         Participant& curr_p = participants[i];
         Participant& last = participants[current_participants];
         if (curr_p.state() == p.state()) {
@@ -294,7 +349,79 @@ bool MainControl::participate(const String &name) const {
 }
 
 bool MainControl::legalParticipant(Participant &p) const {
-    return p.song() != "" && p.state() != "" && p.timeLength() < max_length;
+    return p.song() != "" && p.state() != "" && p.timeLength() <= max_length;
+}
+
+void MainControl::participantsNameSort(String *names, int len)
+{
+    auto temp = new String[len];
+    for(int i=0;i<len;i++)
+        temp[i] = names[i];
+    for(int i=len-1;i>=0;i--)
+    {
+        String max=temp[0];
+        for(int j=0;j<=i;j++)
+        {
+            if (temp[j]>max)
+                max = temp[j];
+        }
+        temp[i] = max;
+    }
+    for(int i=0;i<len;i++)
+        names[i]=temp[i];
+    delete[] temp;
+}
+
+void MainControl::registrationPrint(ostream &os) const
+{
+    auto* names = new String[max_participants];
+    for(int i=0;i<max_participants;i++)
+    {
+        if (participants[i].state()=="")
+            continue;
+        names[i] = participants[i].state();
+    }
+    participantsNameSort(names,max_participants);
+    for(int i=0;i<max_participants;i++)
+    {
+        if(names[i]=="")
+            continue;
+        for(int j=0;j<max_participants;j++)
+        {
+            if (names[i]==participants[j].state())
+                os<<participants[j]<<endl;
+        }
+    }
+    delete[] names;
+}
+
+void MainControl::contestPrint(ostream &os) const
+{
+    auto* names = new String[max_participants];
+    for(int i=0;i<max_participants;i++)
+    {
+        if (participants[i].state()=="")
+            continue;
+        names[i] = participants[i].state();
+    }
+    participantsNameSort(names,max_participants);
+    for (int i =0; i < max_participants;i++)
+        cout << "Sorted: " << names[i] << endl;
+    for(int i=0;i<max_participants;i++)
+    {
+        if(names[i]=="")
+            continue;
+        for(int j=0;j<max_participants;j++)
+        {
+            if (names[i]==participants[j].state())
+            {
+                os<<participants[j].state()<<" : Regular("<<participants[j].regularVotes()
+                <<") Judge("<<participants[j].judgeVotes()<<")"<<endl;
+            }
+
+        }
+    }
+    delete[] names;
 }
 
 
@@ -304,22 +431,17 @@ ostream &operator<<(ostream &os, const MainControl &eurovision) {
     switch (eurovision.phase) {
         case Registration:
             os << "Registration" << endl;
+            eurovision.registrationPrint(os);
             break;
         case Voting:
             os << "Voting" << endl;
+            eurovision.registrationPrint(os);
             break;
         case Contest:
             os << "Contest" << endl;
+            eurovision.contestPrint(os);
             break;
     }
-
-    for (int i = 0; i < eurovision.max_participants; i++) {
-        Participant& p = eurovision.participants[i];
-        if (p.state() == "")
-            continue;
-        os << p << endl;
-    }
-
     os << '}' << endl;
     return os;
 }

@@ -150,6 +150,9 @@ class MainControl {
     int max_length;
     int max_participants;
     int max_regular_votes;
+    static void participantsNameSort(String* names, int len);
+    void registrationPrint(ostream& os) const;
+    void contestPrint(ostream& os) const;
 
 
 public :
