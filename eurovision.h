@@ -105,10 +105,21 @@ public :
 struct Vote {
     String source;
     VoterType type;
-    String target;
+    String *targets;
     int votes_num;
 
-    Vote(Voter source, const String &target);
+    explicit Vote(Voter source,
+            const String &target1 = "",
+            const String &target2 = "",
+            const String &target3 = "",
+            const String &target4 = "",
+            const String &target5 = "",
+            const String &target6 = "",
+            const String &target7 = "",
+            const String &target8 = "",
+            const String &target9 = "",
+            const String &target10 = ""
+            );
 
     Vote &operator++(); //Adds a vote to numOfVotes (reduces number of structs needed to store votes)
     ~Vote() = default;
@@ -121,9 +132,8 @@ ostream &operator<<(ostream &os, const Voter &v);
 
 class MainControl {
     Phase phase;
-    Participant *participants;
-    Voter *voters;
-    Vote *votes;
+    Participant *participants{};
+    Vote *votes{};
     int max_length;
     int max_participants;
     int max_regular_votes;
