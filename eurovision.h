@@ -50,9 +50,12 @@ class Participant
     String p_singer;
     int p_length;
     bool registered;
+    int regular_votes;
+    int judge_votes;
+
 
 public :
-    Participant(const String &name, const String &song, int songLength, const String &singer);
+    explicit Participant(const String &name = "", const String &song = "", int songLength = 0, const String &singer  = "");
 
     Participant(const Participant& ) = delete;
 
@@ -69,6 +72,16 @@ public :
     bool isRegistered();
 
     int timeLength() const;
+
+    int judgeVotes() const;
+
+    int regularVotes() const;
+
+    void setRegularVotes(int amount);
+
+    void setJudgeVotes(int amount);
+
+    void setName(const String& p_name);
 
     void update(const String &song, int length, const String &singer);
 
@@ -133,7 +146,7 @@ ostream &operator<<(ostream &os, const Voter &v);
 class MainControl {
     Phase phase;
     Participant *participants{};
-    Vote *votes{};
+    int current_participants{};
     int max_length;
     int max_participants;
     int max_regular_votes;

@@ -97,6 +97,8 @@ Participant::Participant(const String &name, const String &song, int songLength,
     p_length = songLength;
     p_singer = singer;
     registered = false;
+    regular_votes = 0;
+    judge_votes = 0;
 }
 
 String Participant::state() const {
@@ -130,6 +132,26 @@ void Participant::update(const String &song, int length, const String &singer) {
     p_song = song;
     p_singer = singer;
     p_length = length;
+}
+
+void Participant::setName(const String& p_name) {
+    name = p_name;
+}
+
+int Participant::judgeVotes() const {
+    return judge_votes;
+}
+
+int Participant::regularVotes() const {
+    return regular_votes;
+}
+
+void Participant::setRegularVotes(int amount) {
+    regular_votes = amount;
+}
+
+void Participant::setJudgeVotes(int amount) {
+    judge_votes = amount;
 }
 
 ostream &operator<<(ostream &os, const Participant &p) {
@@ -174,18 +196,28 @@ ostream &operator<<(ostream &os, const Voter &v) {
 
 /** @struct Vote*/
 
-Vote::Vote(Voter source, const String &target)
-{
-    this->source = source.state();
-    this->type = source.voterType();
-    this->target = target;
-    this->votes_num =1;
-}
 
 Vote& Vote::operator++()
 {
     ++votes_num;
     return *this;
+}
+
+#define TARGET_NUM(i) ("target_"#i)
+
+Vote::Vote(Voter source, const String &target_1, const String &target_2, const String &target_3, const String &target_4,
+           const String &target_5, const String &target_6, const String &target_7, const String &target_8,
+           const String &target_9, const String &target_10) {
+
+    this->targets = new String[10];
+    for (int i=0;i<10;i++) {
+        cout << "Testing targets: " << TARGET_NUM(i+1) << endl;
+        this->targets[i] = TARGET_NUM(i+1);
+    }
+    this->source = source.state();
+    this->type = source.voterType();
+    this->votes_num =1;
+
 }
 
 /** @class MainControl */
@@ -195,34 +227,99 @@ MainControl::MainControl(int max_length, int max_participants, int max_regular_v
     this->max_length = max_length;
     this->max_participants = max_participants;
     this->max_regular_votes = max_regular_votes;
+    this->current_participants = 0;
+    this->participants = new Participant[max_participants];
 }
 
 MainControl &MainControl::operator+=(Vote v) {
     // TODO
 }
 
+
 MainControl &MainControl::operator+=(Participant &p) {
-    // TODO
+    if (this->phase != Registration)
+        return *this;
+    if (participate(p.state()))
+        return *this;
+    // reference is also updated for future use
+    p.updateRegistered(true);
+    for (int i=0;i<max_participants;i++) {
+        Participant& p1 = participants[i];
+        if (p1.state() == "") {
+            p1.update(p.song(), p.timeLength(), p.singer());
+            p1.setName(p.state());
+            p1.updateRegistered(true);
+            return *this;
+        }
+    }
+//    current_participants++;
+    return *this;
 }
 
 MainControl &MainControl::operator-=(Participant &p) {
-    // TODO
+    if (this->phase != Registration)
+        return *this;
+    if (!participate(p.state()))
+        return *this;
+    // reference is also updated for future use
+    p.updateRegistered(false);
+    for (int i = 0; i < current_participants; i++) {
+        Participant& curr_p = participants[i];
+        Participant& last = participants[current_participants];
+        if (curr_p.state() == p.state()) {
+            curr_p.setName("");
+            curr_p.updateRegistered(false);
+            return *this;
+        }
+    }
+    current_participants--;
+    return *this;
 }
 
 
 void MainControl::setPhase(const Phase &p) {
+    if (p-phase != 1)
+        return;
     phase = p;
 }
 
 bool MainControl::participate(const String &name) const {
-    // TODO return if the participate exists
+    if (name == "")
+        return false;
+    for (int i = 0; i < max_participants; i++) {
+        if (participants[i].state() == name)
+            return true;
+    }
+    return false;
 }
 
 bool MainControl::legalParticipant(Participant &p) const {
-    // TODO
+    return p.song() != "" && p.state() != "" && p.timeLength() < max_length;
 }
 
+
 ostream &operator<<(ostream &os, const MainControl &eurovision) {
-    // TODO print the stats
+    os << '{' << endl;
+
+    switch (eurovision.phase) {
+        case Registration:
+            os << "Registration" << endl;
+            break;
+        case Voting:
+            os << "Voting" << endl;
+            break;
+        case Contest:
+            os << "Contest" << endl;
+            break;
+    }
+
+    for (int i = 0; i < eurovision.max_participants; i++) {
+        Participant& p = eurovision.participants[i];
+        if (p.state() == "")
+            continue;
+        os << p << endl;
+    }
+
+    os << '}' << endl;
     return os;
 }
