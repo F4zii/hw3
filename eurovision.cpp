@@ -153,9 +153,25 @@ Participant &Participant::operator++() { //Regular Votes Increment
     return *this;
 }
 
-Participant &Participant::operator++(int) {
+Participant& Participant::operator++(int) {
     judge_votes++;
     return *this;
+}
+
+Participant &Participant::operator+=(int amount) {
+    judge_votes+=amount;
+    return *this;
+}
+
+int getJudgeScore(int rank) {
+    if (rank>10 || rank<0)
+        return 0;
+    else if (rank==0)
+        return 12;
+    else if (rank==1)
+        return 10;
+    else
+        return 10-rank;
 }
 
 ostream &operator<<(ostream &os, const Participant &p) {
@@ -191,7 +207,6 @@ String Voter::state() const
 Voter& Voter::operator++()
 {
     votes++;
-//    cout<<"Incremented voter "<<_state<<" to value: "<<votes<<endl;
     return *this;
 }
 
@@ -205,20 +220,22 @@ ostream &operator<<(ostream &os, const Voter &v) {
 }
 
 /** @struct Vote*/
-Vote::Vote(const Voter& source, const String &target1, const String &target2, const String &target3, const String &target4,
+Vote::Vote(Voter& source, const String &target1, const String &target2, const String &target3, const String &target4,
            const String &target5, const String &target6, const String &target7, const String &target8,
            const String &target9, const String &target10): source(source), votes (new String[10]) {
-        votes[0]=target1;
-        votes[1]=target2;
-        votes[2]=target3;
-        votes[3]=target4;
-        votes[4]=target5;
-        votes[5]=target6;
-        votes[6]=target7;
-        votes[7]=target8;
-        votes[8]=target9;
-        votes[9]=target10;
+    votes[0]=target1;
+    votes[1]=target2;
+    votes[2]=target3;
+    votes[3]=target4;
+    votes[4]=target5;
+    votes[5]=target6;
+    votes[6]=target7;
+    votes[7]=target8;
+    votes[8]=target9;
+    votes[9]=target10;
 }
+
+
 
 
 
@@ -236,7 +253,9 @@ MainControl::MainControl(int max_length, int max_participants, int max_regular_v
 MainControl &MainControl::operator+=(Vote v) {
     if (!participate(v.source.state())) //Checks if votes comes from registered state
         return *this;
-    if (v.source.voterType()==Regular && v.source.timesOfVotes() > max_regular_votes) //Checks if regular voter voted less than allowed
+    if (v.source.timesOfVotes()>=max_regular_votes || v.source.timesOfVotes()<=-1) //Checks if regular voter voted less than allowed
+        return *this;
+    if (v.source.voterType()==Judge && v.source.timesOfVotes()==-1)
         return *this;
     for (int i=0;i<10;i++)
     {
@@ -253,7 +272,7 @@ MainControl &MainControl::operator+=(Vote v) {
         {
             if (participants[j].state()==v.votes[i]) //Find state which was voted for
             {
-                v.source.voterType() == Regular ? ++participants[j] : participants[j]++; //Increments participant votes
+                v.source.voterType() == Regular ? ++participants[j] : participants[j]+=getJudgeScore(i); //Increments participant votes
 //                cout<<"Testing voter from "<<v.source.state()<<": Num of votes: "<<v.source.timesOfVotes()<<endl;
             }
         }

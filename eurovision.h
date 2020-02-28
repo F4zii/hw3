@@ -79,6 +79,7 @@ public :
 
     Participant& operator++(); //Increments Regular Votes
     Participant& operator++(int); //Increments Judge Votes
+    Participant& operator+=(int amount); //Adds amount to judge votes
 
     void setName(const String& p_name);
 
@@ -88,6 +89,8 @@ public :
 };
 
 ostream &operator<<(ostream &os, const Participant &p);
+
+int getJudgeScore(int rank);
 
 
 //---------------------------------------------------
@@ -116,8 +119,8 @@ public :
 
 struct Vote {
     String* votes;
-    Voter source;
-    Vote(const Voter& source,
+    Voter& source;
+    Vote(Voter& source,
             const String &target1,
             const String &target2 = "",
             const String &target3 = "",
@@ -127,9 +130,8 @@ struct Vote {
             const String &target7 = "",
             const String &target8 = "",
             const String &target9 = "",
-            const String &target10 = ""
-            );
-    ~Vote() { delete[] votes; };
+            const String &target10 = "");
+    ~Vote() {delete[] votes;}
 
 };
 
