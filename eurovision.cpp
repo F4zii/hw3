@@ -6,57 +6,6 @@
 
 /**@class String (for use instead of std::string)*/
 
-//void mergeA(int low , int mid , int high, String array)
-//{
-//    int i = low, j = mid+1 , k = low;
-//    String temp[5];
-//
-//    while(i <= mid && j <= high)
-//    {
-//        if( array[i] < array[j] )
-//        {
-//            temp[k]=array[i];
-//            i++;
-//        }
-//        else
-//        {
-//            temp[k].assign(array[j]);
-//            j++;
-//        }
-//        k++;
-//    }
-//    if(i > mid )
-//    {
-//        for(int h = j ;h <= high ; h++ )
-//        {
-//            temp[k].assign(array[h]);
-//            k++;
-//        }
-//    }
-//    else
-//        for(int h = i; h<= mid ; h++ )
-//        {
-//            temp[k].assign(array[h]);
-//            k++;
-//        }
-//    for(int i = 0; i <= high ; i++)
-//    {
-//        array[i].assign(temp[i]);
-//    }
-//}
-//
-//void mergeSortA(int low , int high)
-//{
-//    int mid = 0;
-//    if(low < high)
-//    {
-//        mid = ((low+high)/2);
-//        mergeSortA(low, mid);
-//        mergeSortA(mid + 1, high);
-//        mergeA(low, mid, high);
-//    }
-//}
-
 
 void error(const char* str) {
     cerr << "Error: " << str << endl;
@@ -146,9 +95,9 @@ String operator+(const String& str1, const String& str2) { return String(str1) +
 Participant::Participant(const String &name, const String &song, int songLength, const String &singer)
 {
     this->name = name;
-    p_song = song;
-    p_length = songLength;
-    p_singer = singer;
+    _song = song;
+    _length = songLength;
+    _singer = singer;
     registered = false;
     regular_votes = 0;
     judge_votes = 0;
@@ -159,11 +108,11 @@ String Participant::state() const {
 }
 
 String Participant::song() const {
-    return p_song;
+    return _song;
 }
 
 String Participant::singer() const {
-    return p_singer;
+    return _singer;
 }
 
 void Participant::updateRegistered(bool is_registered) {
@@ -176,15 +125,15 @@ bool Participant::isRegistered()
 }
 
 int Participant::timeLength() const {
-    return p_length;
+    return _length;
 }
 
 void Participant::update(const String &song, int length, const String &singer) {
     if (registered)
         return;
-    p_song = song;
-    p_singer = singer;
-    p_length = length;
+    _song = song;
+    _singer = singer;
+    _length = length;
 }
 
 void Participant::setName(const String& p_name) {
@@ -199,12 +148,14 @@ int Participant::regularVotes() const {
     return regular_votes;
 }
 
-void Participant::setRegularVotes(int amount) {
-    regular_votes = amount;
+Participant &Participant::operator++() { //Regular Votes Increment
+    regular_votes++;
+    return *this;
 }
 
-void Participant::setJudgeVotes(int amount) {
-    judge_votes = amount;
+Participant &Participant::operator++(int) {
+    judge_votes++;
+    return *this;
 }
 
 ostream &operator<<(ostream &os, const Participant &p) {
@@ -222,56 +173,54 @@ ostream &operator<<(ostream &os, const Participant &p) {
 /** @class Voter*/
 
 Voter::Voter(String state, VoterType type) {
-    v_state = state;
-    v_type = type;
+    _state = state;
+    _type = type;
     votes = 0;
 }
 
-VoterType Voter::voterType()
+VoterType Voter::voterType() const
 {
-    return v_type;
+    return _type;
 }
 
-String Voter::state()
+String Voter::state() const
 {
-    return v_state;
+    return _state;
 }
 
 Voter& Voter::operator++()
 {
     votes++;
+//    cout<<"Incremented voter "<<_state<<" to value: "<<votes<<endl;
     return *this;
 }
 
 ostream &operator<<(ostream &os, const Voter &v) {
-    // TODO
+    os<<'<'<<v.state()<<'/';
+    if (v.voterType() == Regular)
+        os<<"Regular>";
+    else
+        os<<"Judge>";
+    return os;
 }
 
 /** @struct Vote*/
-
-
-Vote& Vote::operator++()
-{
-    ++votes_num;
-    return *this;
+Vote::Vote(const Voter& source, const String &target1, const String &target2, const String &target3, const String &target4,
+           const String &target5, const String &target6, const String &target7, const String &target8,
+           const String &target9, const String &target10): source(source), votes (new String[10]) {
+        votes[0]=target1;
+        votes[1]=target2;
+        votes[2]=target3;
+        votes[3]=target4;
+        votes[4]=target5;
+        votes[5]=target6;
+        votes[6]=target7;
+        votes[7]=target8;
+        votes[8]=target9;
+        votes[9]=target10;
 }
 
-#define TARGET_NUM(i) ("target_"#i)
 
-Vote::Vote(Voter source, const String &target_1, const String &target_2, const String &target_3, const String &target_4,
-           const String &target_5, const String &target_6, const String &target_7, const String &target_8,
-           const String &target_9, const String &target_10) {
-
-    this->targets = new String[10];
-    for (int i=0;i<10;i++) {
-        cout << "Testing targets: " << TARGET_NUM(i+1) << endl;
-        this->targets[i] = TARGET_NUM(i+1);
-    }
-    this->source = source.state();
-    this->type = source.voterType();
-    this->votes_num =1;
-
-}
 
 /** @class MainControl */
 
@@ -285,7 +234,30 @@ MainControl::MainControl(int max_length, int max_participants, int max_regular_v
 }
 
 MainControl &MainControl::operator+=(Vote v) {
-    // TODO
+    if (!participate(v.source.state())) //Checks if votes comes from registered state
+        return *this;
+    if (v.source.voterType()==Regular && v.source.timesOfVotes() > max_regular_votes) //Checks if regular voter voted less than allowed
+        return *this;
+    for (int i=0;i<10;i++)
+    {
+        if (v.votes[i]=="") //Checks if end of votes has been reached
+            return *this;
+        if (v.source.voterType()==Regular && i>0) //Prevents regular voters from voting more than once
+            return *this;
+        if (v.votes[i]==v.source.state()) //Checks if voter voted for their own state
+            return *this;
+        if(!participate(v.votes[i])) //Checks that voted state is registered
+            return *this;
+        ++v.source;
+        for(int j=0;j<max_participants;j++)
+        {
+            if (participants[j].state()==v.votes[i]) //Find state which was voted for
+            {
+                v.source.voterType() == Regular ? ++participants[j] : participants[j]++; //Increments participant votes
+//                cout<<"Testing voter from "<<v.source.state()<<": Num of votes: "<<v.source.timesOfVotes()<<endl;
+            }
+        }
+    }
 }
 
 
@@ -352,24 +324,20 @@ bool MainControl::legalParticipant(Participant &p) const {
     return p.song() != "" && p.state() != "" && p.timeLength() <= max_length;
 }
 
-void MainControl::participantsNameSort(String *names, int len)
+void MainControl::participantsNameSort(String* names, int len)
 {
-    auto temp = new String[len];
-    for(int i=0;i<len;i++)
-        temp[i] = names[i];
-    for(int i=len-1;i>=0;i--)
+    for(int i=0; i<len-1;i++)
     {
-        String max=temp[0];
-        for(int j=0;j<=i;j++)
+        for(int j=0;j<len-i-1;j++)
         {
-            if (temp[j]>max)
-                max = temp[j];
+            if(names[j]> names[j+1])
+            {
+                String temp = names[j];
+                names[j] = names[j+1];
+                names[j+1] = temp;
+            }
         }
-        temp[i] = max;
     }
-    for(int i=0;i<len;i++)
-        names[i]=temp[i];
-    delete[] temp;
 }
 
 void MainControl::registrationPrint(ostream &os) const
@@ -405,8 +373,6 @@ void MainControl::contestPrint(ostream &os) const
         names[i] = participants[i].state();
     }
     participantsNameSort(names,max_participants);
-    for (int i =0; i < max_participants;i++)
-        cout << "Sorted: " << names[i] << endl;
     for(int i=0;i<max_participants;i++)
     {
         if(names[i]=="")
@@ -435,7 +401,7 @@ ostream &operator<<(ostream &os, const MainControl &eurovision) {
             break;
         case Voting:
             os << "Voting" << endl;
-            eurovision.registrationPrint(os);
+            eurovision.contestPrint(os);
             break;
         case Contest:
             os << "Contest" << endl;

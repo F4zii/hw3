@@ -46,9 +46,9 @@ String operator+(const String& str1, const String& str2);
 class Participant
 {
     String name;
-    String p_song;
-    String p_singer;
-    int p_length;
+    String _song;
+    String _singer;
+    int _length;
     bool registered;
     int regular_votes;
     int judge_votes;
@@ -77,9 +77,8 @@ public :
 
     int regularVotes() const;
 
-    void setRegularVotes(int amount);
-
-    void setJudgeVotes(int amount);
+    Participant& operator++(); //Increments Regular Votes
+    Participant& operator++(int); //Increments Judge Votes
 
     void setName(const String& p_name);
 
@@ -95,17 +94,17 @@ ostream &operator<<(ostream &os, const Participant &p);
 
 
 class Voter {
-    String v_state; //Named vstate and vtype to not interfere with state() and voterType() functions
-    VoterType v_type;
+    String _state; //Named vstate and vtype to not interfere with state() and voterType() functions
+    VoterType _type;
     int votes;
 
 public :
 
     explicit Voter(String state, VoterType type = Regular);
 
-    VoterType voterType();
+    VoterType voterType() const;
 
-    String state();
+    String state() const;
 
     Voter &operator++(); //Votes number check is internal int operator+=(Vote)
 
@@ -116,13 +115,10 @@ public :
 // -----------------------------------------------------------
 
 struct Vote {
-    String source;
-    VoterType type;
-    String *targets;
-    int votes_num;
-
-    explicit Vote(Voter source,
-            const String &target1 = "",
+    String* votes;
+    Voter source;
+    Vote(const Voter& source,
+            const String &target1,
             const String &target2 = "",
             const String &target3 = "",
             const String &target4 = "",
@@ -133,9 +129,7 @@ struct Vote {
             const String &target9 = "",
             const String &target10 = ""
             );
-
-    Vote &operator++(); //Adds a vote to numOfVotes (reduces number of structs needed to store votes)
-    ~Vote() = default;
+    ~Vote() { delete[] votes; };
 
 };
 
