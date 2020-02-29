@@ -153,14 +153,22 @@ Participant &Participant::operator++() { //Regular Votes Increment
     return *this;
 }
 
-Participant& Participant::operator++(int) {
-    judge_votes++;
-    return *this;
-}
 
 Participant &Participant::operator+=(int amount) {
     judge_votes+=amount;
     return *this;
+}
+
+int Participant::getVotes(VoterType type) const {
+    switch (type)
+    {
+        case Regular:
+            return regular_votes;
+        case Judge:
+            return judge_votes;
+        default:
+            return regular_votes+judge_votes;
+    }
 }
 
 int getJudgeScore(int rank) {
@@ -409,6 +417,11 @@ void MainControl::contestPrint(ostream &os) const
     delete[] names;
 }
 
+MainControl::~MainControl()
+{
+    delete[] participants;
+}
+
 
 ostream &operator<<(ostream &os, const MainControl &eurovision) {
     os << '{' << endl;
@@ -430,3 +443,50 @@ ostream &operator<<(ostream &os, const MainControl &eurovision) {
     os << '}' << endl;
     return os;
 }
+
+struct ParticipantsCompare{
+    VoterType type;
+    explicit ParticipantsCompare(VoterType type): type(type) {};
+    bool operator()(Participant* p1, Participant* p2) {
+        if (p1->getVotes(type) == p2->getVotes(type))
+            return p1->state() > p2->state();
+        return p1->getVotes(type) > p2->getVotes(type);
+    }
+};
+
+String MainControl::operator()(int place, VoterType type) {
+    vector<Participant*> sorted_participants;
+    for(int i=0;i<max_participants;i++)
+    {
+        if (participants[i].state()!="")
+            sorted_participants.push_back(&participants[i]);
+    }
+    return (*get(place,sorted_participants.begin(),sorted_participants.end(),ParticipantsCompare(type)))->state();
+}
+
+
+template<class Iterator, class Predicate>
+Iterator get(int i, Iterator begin, Iterator end, Predicate predicate)
+{
+    if(i<=0) //Checks if index is positive
+        return end;
+    int size=0;
+    for(auto k=begin;!(k==end);++k)
+        size++;
+    if (i>size) //Checks if index is in range
+        return end;
+    vector<Iterator> maxElements;
+    for(int j=0; j<i;j++)
+    {
+        Iterator& curr_max = begin;
+        for(auto k = begin; !(k==end);++k)
+        {
+            if (predicate(*k,*curr_max) && std::find(maxElements.begin(),maxElements.end(),k) == maxElements.end())
+                curr_max = k;
+        }
+        maxElements.push_back(curr_max);
+    }
+    return maxElements.at(maxElements.size()-1);
+}
+
+

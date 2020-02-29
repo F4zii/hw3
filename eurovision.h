@@ -2,8 +2,11 @@
 #define EUROVISION_H_
 
 #include <iostream>
+#include<algorithm>
+#include<vector>
 #include<cstring>
 using std::ostream;
+using std::vector;
 using std::cerr;
 using std::endl;
 using std::cout;
@@ -77,8 +80,10 @@ public :
 
     int regularVotes() const;
 
+    int getVotes(VoterType type=All) const;
+
     Participant& operator++(); //Increments Regular Votes
-    Participant& operator++(int); //Increments Judge Votes
+
     Participant& operator+=(int amount); //Adds amount to judge votes
 
     void setName(const String& p_name);
@@ -167,8 +172,16 @@ public :
     bool legalParticipant(Participant &p) const;
 
     friend ostream &operator<<(std::ostream &os, const MainControl &eurovision);
+
+    String operator() (int place, VoterType type);
+
+    ~MainControl();
 };
 
 // -----------------------------------------------------------
+
+template<class Iterator, class Condition>
+Iterator get(int i, Iterator begin, Iterator end, Condition condition);
+
 
 #endif

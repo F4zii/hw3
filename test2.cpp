@@ -184,18 +184,18 @@ TEST("1.7")
   cout << eurovision << endl;
 
 
-TEST("1.7.1")
-
-  MainControl::Iterator i;
-  for (i = eurovision.begin(); i<eurovision.end(); ++i)
-     cout << *i << endl;
-
-TEST("1.7.2")
-  for (i = eurovision.begin(); !(i==eurovision.end()); ++i)
-     cout << *i << endl;
-
-TEST("1.7.3")
-//  --i; // compilation error. operator -- does not exist for i.
+//TEST("1.7.1")
+//
+//  MainControl::Iterator i;
+//  for (i = eurovision.begin(); i<eurovision.end(); ++i)
+//     cout << *i << endl;
+//
+//TEST("1.7.2")
+//  for (i = eurovision.begin(); !(i==eurovision.end()); ++i)
+//     cout << *i << endl;
+//
+//TEST("1.7.3")
+////  --i; // compilation error. operator -- does not exist for i.
 
 
   eurovision.setPhase(Voting);

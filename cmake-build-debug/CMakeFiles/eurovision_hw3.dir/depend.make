@@ -4,6 +4,6 @@
 CMakeFiles/eurovision_hw3.dir/eurovision.cpp.obj: ../eurovision.cpp
 CMakeFiles/eurovision_hw3.dir/eurovision.cpp.obj: ../eurovision.h
 
-CMakeFiles/eurovision_hw3.dir/test1.cpp.obj: ../eurovision.h
-CMakeFiles/eurovision_hw3.dir/test1.cpp.obj: ../test1.cpp
+CMakeFiles/eurovision_hw3.dir/test2.cpp.obj: ../eurovision.h
+CMakeFiles/eurovision_hw3.dir/test2.cpp.obj: ../test2.cpp
 
