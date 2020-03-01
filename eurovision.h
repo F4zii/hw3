@@ -159,6 +159,8 @@ class MainControl {
 public :
     explicit MainControl(int max_length = 180, int max_participants = 26, int max_regular_votes = 5);
 
+    class Iterator;
+
     void setPhase(const Phase &p);
 
     MainControl &operator+=(Participant &p);
@@ -175,7 +177,37 @@ public :
 
     String operator() (int place, VoterType type);
 
+    Iterator begin();
+
+    Iterator end();
+
     ~MainControl();
+};
+// -----------------------------------------------------------
+class MainControl::Iterator
+{
+    MainControl* eurovision;
+    int index;
+    vector<String> names;
+    Iterator(MainControl* e, int index=0): eurovision(e), index(index) {};
+    friend class MainControl;
+public:
+    Iterator(): eurovision(nullptr), index(0) {};
+    String operator*() {
+        return eurovision->participants[index].state();
+    }
+    Iterator& operator++() {
+        do{
+            index++;
+        } while (eurovision->participants[index].state() == "" );
+        return *this;
+    }
+    bool operator==( const Iterator& obj){
+        return (eurovision == obj.eurovision && index == obj.index);
+    }
+    bool operator< (const Iterator& obj){
+        return (eurovision==obj.eurovision && index<obj.index);
+    }
 };
 
 // -----------------------------------------------------------
