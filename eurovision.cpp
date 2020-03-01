@@ -447,7 +447,7 @@ ostream &operator<<(ostream &os, const MainControl &eurovision) {
 struct ParticipantsCompare{
     VoterType type;
     explicit ParticipantsCompare(VoterType type): type(type) {};
-    bool operator()(Participant* p1, Participant* p2) {
+    bool operator() (Participant* p1, Participant* p2) {
         if (p1->getVotes(type) == p2->getVotes(type))
             return p1->state() > p2->state();
         return p1->getVotes(type) > p2->getVotes(type);
@@ -458,8 +458,7 @@ String MainControl::operator()(int place, VoterType type) {
     vector<Participant*> sorted_participants;
     for(int i=0;i<max_participants;i++)
     {
-        if (participants[i].state()!="")
-            sorted_participants.push_back(&participants[i]);
+        sorted_participants.push_back(&participants[i]);
     }
     return (*get(place,sorted_participants.begin(),sorted_participants.end(),ParticipantsCompare(type)))->state();
 }
@@ -488,5 +487,6 @@ Iterator get(int i, Iterator begin, Iterator end, Predicate predicate)
     }
     return maxElements.at(maxElements.size()-1);
 }
+
 
 
