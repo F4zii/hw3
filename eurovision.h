@@ -184,39 +184,8 @@ public :
 
     Iterator end();
 
-    Iterator begin();
-
-    Iterator end();
-
     ~MainControl();
 };
-// -----------------------------------------------------------
-class MainControl::Iterator
-{
-    MainControl* eurovision;
-    int index;
-    vector<String> names;
-    Iterator(MainControl* e, int index=0): eurovision(e), index(index) {};
-    friend class MainControl;
-public:
-    Iterator(): eurovision(nullptr), index(0) {};
-    String operator*() {
-        return eurovision->participants[index].state();
-    }
-    Iterator& operator++() {
-        do{
-            index++;
-        } while (eurovision->participants[index].state() == "" );
-        return *this;
-    }
-    bool operator==( const Iterator& obj){
-        return (eurovision == obj.eurovision && index == obj.index);
-    }
-    bool operator< (const Iterator& obj){
-        return (eurovision==obj.eurovision && index<obj.index);
-    }
-};
-
 // -----------------------------------------------------------
 class MainControl::Iterator {
     MainControl *eurovision;
