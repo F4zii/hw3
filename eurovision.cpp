@@ -458,9 +458,13 @@ String MainControl::operator()(int place, VoterType type) {
     vector<Participant*> sorted_participants;
     for(int i=0;i<max_participants;i++)
     {
-        sorted_participants.push_back(&participants[i]);
+        if (participants[i].state()!="")
+            sorted_participants.push_back(&participants[i]);
     }
-    return (*get(place,sorted_participants.begin(),sorted_participants.end(),ParticipantsCompare(type)))->state();
+    auto p = get(place,sorted_participants.begin(),sorted_participants.end(),ParticipantsCompare(type));
+    if (p==sorted_participants.end())
+        return "";
+    return (*p)->state();
 }
 
 
@@ -470,14 +474,14 @@ Iterator get(int i, Iterator begin, Iterator end, Predicate predicate)
     if(i<=0) //Checks if index is positive
         return end;
     int size=0;
-    for(auto k=begin;!(k==end);++k)
+    for (auto k=begin;!(k==end);++k)
         size++;
-    if (i>size) //Checks if index is in range
+    if (i>size)
         return end;
     vector<Iterator> maxElements;
     for(int j=0; j<i;j++)
     {
-        Iterator& curr_max = begin;
+        Iterator curr_max = begin;
         for(auto k = begin; !(k==end);++k)
         {
             if (predicate(*k,*curr_max) && std::find(maxElements.begin(),maxElements.end(),k) == maxElements.end())
