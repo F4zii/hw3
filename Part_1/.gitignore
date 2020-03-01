@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/cmake-build-debug/CMakeFiles/3.15.3/
+/cmake-build-debug/cmake_install.cmake
+/cmake-build-debug/CMakeCache.txt
+/cmake-build-debug/untitled1.cbp
+/cmake-build-debug/Makefile
+/cmake-build-debug/CMakeFiles/3.15.3/
+/cmake-build-debug/CMakeFiles/

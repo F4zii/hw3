@@ -1,3 +1,3 @@
-/home/iddos/Documents/Github/CPP/hw3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/iddos/Documents/Github/CPP/hw3/cmake-build-debug/CMakeFiles/untitled1.dir
-/home/iddos/Documents/Github/CPP/hw3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/iddos/Documents/Github/CPP/hw3/Part_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/iddos/Documents/Github/CPP/hw3/Part_1/cmake-build-debug/CMakeFiles/untitled1.dir
+/home/iddos/Documents/Github/CPP/hw3/Part_1/cmake-build-debug/CMakeFiles/edit_cache.dir
