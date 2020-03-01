@@ -151,13 +151,18 @@ class MainControl {
     int max_length;
     int max_participants;
     int max_regular_votes;
-    static void participantsNameSort(String* names, int len);
-    void registrationPrint(ostream& os) const;
-    void contestPrint(ostream& os) const;
+
+    static void participantsNameSort(String *names, int len);
+
+    void registrationPrint(ostream &os) const;
+
+    void contestPrint(ostream &os) const;
 
 
 public :
     explicit MainControl(int max_length = 180, int max_participants = 26, int max_regular_votes = 5);
+
+    class Iterator;
 
     void setPhase(const Phase &p);
 
@@ -173,9 +178,48 @@ public :
 
     friend ostream &operator<<(std::ostream &os, const MainControl &eurovision);
 
-    String operator() (int place, VoterType type);
+    String operator()(int place, VoterType type);
+
+    Iterator begin();
+
+    Iterator end();
 
     ~MainControl();
+};
+
+// -----------------------------------------------------------
+class MainControl::Iterator {
+    MainControl *eurovision;
+    int index;
+    vector<String> names;
+
+    explicit Iterator(MainControl *e, int index = 0) : eurovision(e), index(index) {};
+
+    friend class MainControl;
+
+public:
+    Iterator() : eurovision(nullptr), index(0) {};
+
+    String operator*() {
+        if (index < 0 || index >= eurovision->max_participants)
+            return "";
+        return eurovision->participants[index].state();
+    }
+
+    Iterator &operator++() {
+        do {
+            index++;
+        } while (eurovision->participants[index].state() == "");
+        return *this;
+    }
+
+    bool operator==(const Iterator &obj) {
+        return (eurovision == obj.eurovision && index == obj.index);
+    }
+
+    bool operator<(const Iterator &obj) {
+        return (eurovision == obj.eurovision && index < obj.index);
+    }
 };
 
 // -----------------------------------------------------------
