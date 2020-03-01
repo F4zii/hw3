@@ -467,6 +467,14 @@ String MainControl::operator()(int place, VoterType type) {
     return (*p)->state();
 }
 
+MainControl::Iterator MainControl::begin() {
+    return Iterator(this);
+}
+
+MainControl::Iterator MainControl::end(){
+    return Iterator(this,max_participants);
+}
+
 
 template<class Iterator, class Predicate>
 Iterator get(int i, Iterator begin, Iterator end, Predicate predicate)
