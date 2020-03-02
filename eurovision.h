@@ -206,6 +206,8 @@ public:
     }
 
     Iterator &operator++() {
+        if (index + 1 >= eurovision->max_participants)
+            return *this;
         do {
             index++;
         } while (eurovision->participants[index].state() == "");
