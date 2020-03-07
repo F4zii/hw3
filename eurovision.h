@@ -151,6 +151,7 @@ class MainControl {
     int max_length;
     int max_participants;
     int max_regular_votes;
+    vector<Participant*> iterable_participants;
 
     static void participantsNameSort(String *names, int len);
 
@@ -188,38 +189,38 @@ public :
 };
 // -----------------------------------------------------------
 class MainControl::Iterator {
-    MainControl *eurovision;
-    int index;
-    vector<String> names;
+    MainControl* eurovision;
+    int it;
 
-    explicit Iterator(MainControl *e, int index = 0) : eurovision(e), index(index) {};
+    explicit Iterator(MainControl *e, int it) : eurovision(e), it(it) {};
 
     friend class MainControl;
 
 public:
-    Iterator() : eurovision(nullptr), index(0) {};
+    Iterator() : eurovision(nullptr), it(0) {};
 
-    String operator*() {
-        if (index < 0 || index >= eurovision->max_participants)
-            return "";
-        return eurovision->participants[index].state();
+    Iterator& operator= (Iterator obj) {
+        if (this == &obj)
+            return *this;
+        eurovision = obj.eurovision;
+        it = obj.it;
+        return *this;
+    };
+
+    Participant& operator*() {
+        return *(eurovision->iterable_participants.at(it));
     }
 
-    Iterator &operator++() {
-        if (index + 1 >= eurovision->max_participants)
-            return *this;
-        do {
-            index++;
-        } while (eurovision->participants[index].state() == "");
-        return *this;
+    Iterator& operator++() {
+        it++;
     }
 
     bool operator==(const Iterator &obj) {
-        return (eurovision == obj.eurovision && index == obj.index);
+        return (eurovision == obj.eurovision && it==obj.it);
     }
 
     bool operator<(const Iterator &obj) {
-        return (eurovision == obj.eurovision && index < obj.index);
+        return (eurovision == obj.eurovision && it< obj.it);
     }
 };
 

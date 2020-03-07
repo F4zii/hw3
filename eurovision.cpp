@@ -131,9 +131,12 @@ int Participant::timeLength() const {
 void Participant::update(const String &song, int length, const String &singer) {
     if (registered)
         return;
-    _song = song;
-    _singer = singer;
-    _length = length;
+    if (song!="")
+        _song = song;
+    if (singer!="")
+        _singer = singer;
+    if(length!=0)
+        _length = length;
 }
 
 void Participant::setName(const String& p_name) {
@@ -249,7 +252,7 @@ Vote::Vote(Voter& source, const String &target1, const String &target2, const St
 
 /** @class MainControl */
 
-MainControl::MainControl(int max_length, int max_participants, int max_regular_votes) {
+MainControl::MainControl(int max_length, int max_participants, int max_regular_votes): iterable_participants() {
     this->phase = Registration;
     this->max_length = max_length;
     this->max_participants = max_participants;
@@ -287,6 +290,12 @@ MainControl &MainControl::operator+=(Vote v) {
     }
 }
 
+struct compareParticipantsByName{
+    bool operator()(Participant* p1, Participant* p2){
+        return p1->state() < p2->state();
+    }
+};
+
 
 MainControl &MainControl::operator+=(Participant &p) {
     if (this->phase != Registration)
@@ -297,6 +306,10 @@ MainControl &MainControl::operator+=(Participant &p) {
         return *this;
     // reference is also updated for future use
     p.updateRegistered(true);
+    iterable_participants.push_back(&p);
+    std::sort(iterable_participants.begin(),iterable_participants.end(),compareParticipantsByName());
+    auto it = std::unique(iterable_participants.begin(),iterable_participants.end());
+    iterable_participants.resize(std::distance(iterable_participants.begin(),it));
     for (int i=0;i<max_participants;i++) {
         Participant& p1 = participants[i];
         if (p1.state() == "") {
@@ -461,6 +474,8 @@ String MainControl::operator()(int place, VoterType type) {
         if (participants[i].state()!="")
             sorted_participants.push_back(&participants[i]);
     }
+//    auto it = std::unique(sorted_participants.begin(),sorted_participants.end());
+//    sorted_participants.resize(std::distance(sorted_participants.begin(),it));
     auto p = get(place,sorted_participants.begin(),sorted_participants.end(),ParticipantsCompare(type));
     if (p==sorted_participants.end())
         return "";
@@ -468,11 +483,11 @@ String MainControl::operator()(int place, VoterType type) {
 }
 
 MainControl::Iterator MainControl::begin() {
-    return Iterator(this);
+    return Iterator(this,0);
 }
 
 MainControl::Iterator MainControl::end(){
-    return Iterator(this,max_participants);
+    return Iterator(this,std::distance(iterable_participants.begin(),iterable_participants.end()));
 }
 
 
@@ -481,10 +496,7 @@ Iterator get(int i, Iterator begin, Iterator end, Predicate predicate)
 {
     if(i<=0) //Checks if index is positive
         return end;
-    int size=0;
-    for (auto k=begin;!(k==end);++k)
-        size++;
-    if (i>size)
+    if (i>std::distance(begin,end))
         return end;
     vector<Iterator> maxElements;
     for(int j=0; j<i;j++)
@@ -493,12 +505,15 @@ Iterator get(int i, Iterator begin, Iterator end, Predicate predicate)
         for(auto k = begin; !(k==end);++k)
         {
             if (predicate(*k,*curr_max) && std::find(maxElements.begin(),maxElements.end(),k) == maxElements.end())
+            {
                 curr_max = k;
+            }
         }
         maxElements.push_back(curr_max);
     }
     return maxElements.at(maxElements.size()-1);
 }
+
 
 
 

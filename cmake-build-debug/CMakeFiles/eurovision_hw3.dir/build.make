@@ -42,10 +42,10 @@ RM = "C:\Program Files\JetBrains\CLion 2019.3.2\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Ethan\CLionProjects\eurovision_hw3
+CMAKE_SOURCE_DIR = C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Ethan\CLionProjects\eurovision_hw3\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/eurovision_hw3.dir/depend.make
@@ -58,29 +58,29 @@ include CMakeFiles/eurovision_hw3.dir/flags.make
 
 CMakeFiles/eurovision_hw3.dir/test2.cpp.obj: CMakeFiles/eurovision_hw3.dir/flags.make
 CMakeFiles/eurovision_hw3.dir/test2.cpp.obj: ../test2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ethan\CLionProjects\eurovision_hw3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/eurovision_hw3.dir/test2.cpp.obj"
-	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\eurovision_hw3.dir\test2.cpp.obj -c C:\Users\Ethan\CLionProjects\eurovision_hw3\test2.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/eurovision_hw3.dir/test2.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\eurovision_hw3.dir\test2.cpp.obj -c C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\test2.cpp
 
 CMakeFiles/eurovision_hw3.dir/test2.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/eurovision_hw3.dir/test2.cpp.i"
-	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ethan\CLionProjects\eurovision_hw3\test2.cpp > CMakeFiles\eurovision_hw3.dir\test2.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\test2.cpp > CMakeFiles\eurovision_hw3.dir\test2.cpp.i
 
 CMakeFiles/eurovision_hw3.dir/test2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/eurovision_hw3.dir/test2.cpp.s"
-	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ethan\CLionProjects\eurovision_hw3\test2.cpp -o CMakeFiles\eurovision_hw3.dir\test2.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\test2.cpp -o CMakeFiles\eurovision_hw3.dir\test2.cpp.s
 
 CMakeFiles/eurovision_hw3.dir/eurovision.cpp.obj: CMakeFiles/eurovision_hw3.dir/flags.make
 CMakeFiles/eurovision_hw3.dir/eurovision.cpp.obj: ../eurovision.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ethan\CLionProjects\eurovision_hw3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/eurovision_hw3.dir/eurovision.cpp.obj"
-	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\eurovision_hw3.dir\eurovision.cpp.obj -c C:\Users\Ethan\CLionProjects\eurovision_hw3\eurovision.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/eurovision_hw3.dir/eurovision.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\eurovision_hw3.dir\eurovision.cpp.obj -c C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\eurovision.cpp
 
 CMakeFiles/eurovision_hw3.dir/eurovision.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/eurovision_hw3.dir/eurovision.cpp.i"
-	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ethan\CLionProjects\eurovision_hw3\eurovision.cpp > CMakeFiles\eurovision_hw3.dir\eurovision.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\eurovision.cpp > CMakeFiles\eurovision_hw3.dir\eurovision.cpp.i
 
 CMakeFiles/eurovision_hw3.dir/eurovision.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/eurovision_hw3.dir/eurovision.cpp.s"
-	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ethan\CLionProjects\eurovision_hw3\eurovision.cpp -o CMakeFiles\eurovision_hw3.dir\eurovision.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\eurovision.cpp -o CMakeFiles\eurovision_hw3.dir\eurovision.cpp.s
 
 # Object files for target eurovision_hw3
 eurovision_hw3_OBJECTS = \
@@ -96,7 +96,7 @@ eurovision_hw3.exe: CMakeFiles/eurovision_hw3.dir/build.make
 eurovision_hw3.exe: CMakeFiles/eurovision_hw3.dir/linklibs.rsp
 eurovision_hw3.exe: CMakeFiles/eurovision_hw3.dir/objects1.rsp
 eurovision_hw3.exe: CMakeFiles/eurovision_hw3.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Ethan\CLionProjects\eurovision_hw3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable eurovision_hw3.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable eurovision_hw3.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\eurovision_hw3.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -109,6 +109,6 @@ CMakeFiles/eurovision_hw3.dir/clean:
 .PHONY : CMakeFiles/eurovision_hw3.dir/clean
 
 CMakeFiles/eurovision_hw3.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Ethan\CLionProjects\eurovision_hw3 C:\Users\Ethan\CLionProjects\eurovision_hw3 C:\Users\Ethan\CLionProjects\eurovision_hw3\cmake-build-debug C:\Users\Ethan\CLionProjects\eurovision_hw3\cmake-build-debug C:\Users\Ethan\CLionProjects\eurovision_hw3\cmake-build-debug\CMakeFiles\eurovision_hw3.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3 C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3 C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\cmake-build-debug C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\cmake-build-debug C:\Users\Ethan\Desktop\CodingProjects\Github\hw3_eurovision\hw3\cmake-build-debug\CMakeFiles\eurovision_hw3.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/eurovision_hw3.dir/depend
 

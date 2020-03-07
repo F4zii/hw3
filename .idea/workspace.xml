@@ -83,6 +83,7 @@
       <workItem from="1581764087352" duration="2366000" />
       <workItem from="1581775057911" duration="4762000" />
       <workItem from="1582894487900" duration="31964000" />
+      <workItem from="1583151478907" duration="140000" />
     </task>
     <servers />
   </component>
@@ -134,10 +135,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1582904929350" />
-    <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1581686234379">
+    <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1583151483057">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="636" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581686234379" />
+    <state x="636" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583151483057" />
     <state x="432" y="185" key="git4idea.merge.GitMergeDialog" timestamp="1582700729614">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
