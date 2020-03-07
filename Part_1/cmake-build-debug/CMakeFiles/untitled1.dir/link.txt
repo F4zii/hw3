@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/untitled1.dir/main.cpp.o CMakeFiles/untitled1.dir/test1.cpp.o CMakeFiles/untitled1.dir/eurovision.cpp.o  -o untitled1 

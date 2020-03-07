@@ -38,19 +38,19 @@ public:
 };
 
 // ---------------------------------------------
-class SpecialSeat : public Seat
+class SpecialSeat : public MainHallSeat
 {
     const static int sps_price_addition = 300;
 protected:
-    SpecialSeat(int row_num, int num, int price) : Seat(row_num,num,price+sps_price_addition) {};
+    SpecialSeat(int row_num, int num, int price) : MainHallSeat(row_num,num,price+sps_price_addition) {};
     virtual ~SpecialSeat() = default;
 };
 
 // ---------------------------------------------
-class GreenRoomSeat: public SpecialSeat
+class GreenRoomSeat: public Seat
 {
 public:
-    GreenRoomSeat(int row_num, int num): SpecialSeat(row_num,num,0){} ; //sets price to 0 for constructor
+    GreenRoomSeat(int row_num, int num): Seat(row_num,num,0){} ; //sets price to 0 for constructor
     int price() override{ throw NoPrice(); }
     string location() override{ return "Green Room-> "+Seat::location(); }
     ~GreenRoomSeat() override = default;

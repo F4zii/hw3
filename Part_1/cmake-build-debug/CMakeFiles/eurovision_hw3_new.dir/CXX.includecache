@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Ethan/CLionProjects/eurovision_hw3_new/eurovision.cpp
+eurovision.h
+C:/Users/Ethan/CLionProjects/eurovision_hw3_new/eurovision.h
+
+C:/Users/Ethan/CLionProjects/eurovision_hw3_new/eurovision.h
+iostream
+-
+algorithm
+-
+vector
+-
+cstring
+-
+
