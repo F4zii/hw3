@@ -360,7 +360,6 @@ TEST("1.17")
 
 TEST("1.17.1")
 
-  cout<<eurovision<<endl;
   cout << eurovision(1, Regular) << endl;
   cout << eurovision(2, Regular) << endl;
   cout << eurovision(3, Regular) << endl;
