@@ -511,7 +511,10 @@ Iterator get(int i, Iterator begin, Iterator end, Predicate predicate)
         }
         maxElements.push_back(curr_max);
     }
-    return maxElements.at(maxElements.size()-1);
+    if (std::unique(maxElements.begin(),maxElements.end())==maxElements.end())
+        return maxElements.at(maxElements.size()-1);
+    else
+        return std::max_element(begin,end,predicate);
 }
 
 
